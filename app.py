@@ -12,9 +12,9 @@ from xgboost import XGBRegressor
 
 st.set_page_config(page_title="Sales Forecasting Dashboard", layout="wide")
 
-# ---------------------------
+
 # Data Loading (cached)
-# ---------------------------
+
 @st.cache_data
 def load_data():
     df = pd.read_csv('train.csv', encoding='latin1')
@@ -36,15 +36,14 @@ def get_season(month):
     else:
         return 3
 
-# ---------------------------
 # Sidebar Navigation
-# ---------------------------
+
 st.sidebar.title(" Navigation")
 page = st.sidebar.radio("Go to", ["Sales Overview", "Forecast Explorer", "Anomaly Report", "Product Demand Segments"])
 
-# ---------------------------
+
 # PAGE 1: Sales Overview Dashboard
-# ---------------------------
+
 if page == "Sales Overview":
     st.title(" Sales Overview Dashboard")
 
@@ -74,10 +73,9 @@ if page == "Sales Overview":
     fig3 = px.bar(region_cat, x='Region', y='Sales', color='Category', barmode='group')
     st.plotly_chart(fig3, use_container_width=True)
     
-    
-    # ---------------------------
+ 
 # PAGE 2: Forecast Explorer
-# ---------------------------
+
 elif page == "Forecast Explorer":
     st.title(" Forecast Explorer")
 
@@ -137,9 +135,9 @@ elif page == "Forecast Explorer":
     col1.metric("MAE", f"{mae:,.2f}")
     col2.metric("RMSE", f"{rmse:,.2f}")
     
-    # ---------------------------
+    
 # PAGE 3: Anomaly Report
-# ---------------------------
+
 elif page == "Anomaly Report":
     st.title(" Anomaly Report")
 
@@ -165,9 +163,9 @@ elif page == "Anomaly Report":
     st.subheader("Detected Anomalies")
     st.dataframe(anomalies[['Week', 'Sales']].reset_index(drop=True), use_container_width=True)
     
-    # ---------------------------
+
 # PAGE 4: Product Demand Segments
-# ---------------------------
+
 elif page == "Product Demand Segments":
     st.title(" Product Demand Segments")
 
